@@ -1,0 +1,578 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: 'gliker';
+}
+
+/* MENÚ NAVEGACIÓN */
+nav {
+    background: #8a3319;
+    font-family: 'gliker';
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.enlace {
+    margin-right: auto;
+    padding-right: 20px;
+}
+
+.logo {
+    height: 72px;
+    width: auto;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.nav-list li {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.nav-list li a {
+    color: #ffffff;
+    font-size: 15px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.nav-list li a.active, .nav-list li a:hover {
+    background: #1d1b1b;
+    transition: .5s;
+}
+
+    .search-container {
+        position: relative;
+        display: inline-block;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-bar {
+        border: 2px solid #007BFF; /* Color de borde más atractivo */
+        border-radius: 25px; /* Bordes más redondeados */
+        outline: none; /* Sin contorno por defecto */
+        width: 350px; /* Ancho del input */
+        font-size: 16px; /* Tamaño de fuente */
+        transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.1); /* Sombra sutil */
+    }
+
+    .search-bar:focus {
+        border-color: #0056b3; /* Cambiar color del borde al enfocar */
+        box-shadow: 0 0 8px rgba(0, 86, 179, 0.5); /* Sombra más intensa al enfocar */
+    }
+
+    .search-results {
+        border-radius: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        background-color: white;
+        z-index: 10;
+        width: 100%; /* Ajustar al ancho de la barra de búsqueda */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-top: 250px; /* Espacio entre la barra de búsqueda y los resultados */
+    }
+
+    .search-results div {
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .search-results div:hover {
+        background-color: #f0f0f0;
+    }
+
+    .search-results div:active {
+        background-color: #e0e0e0;
+    }
+
+#search-icon{
+    font-size: 20px;
+    padding-right: 5px;
+    color: #12253f;
+}
+
+input,
+textarea {
+    background-color: #ffffffbe;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'gliker';
+}
+
+.cart-icon {
+    font-size: 25px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+/* Responsividad */
+@media (max-width: 1200px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #8a3319d8;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        padding: 0;
+    }
+
+    #check:checked ~ .nav-list {
+        display: flex;
+    }
+
+    .checkbtn {
+        display: block;
+    }
+
+    .cart-icon {
+        display: block;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .product-gallery {
+        margin-right: 0;
+    }
+
+    .main-image {
+        max-width: 100%;
+    }
+
+    .thumbnails {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .thumbnails img {
+        width: 80px;
+    }
+
+    .product-info {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .price {
+        font-size: 1.2em;
+    }
+
+    .description {
+        margin: 15px 0;
+    }
+
+    .add-to-cart input, .add-to-cart button {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-list li {
+        margin: 10px 0;
+    }
+
+    .search-bar {
+        max-width: 300px;
+    }
+
+    .footer {
+        font-size: 0.9em;
+        padding: 20px 10px;
+    }
+
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-media {
+        margin-bottom: 10px;
+    }
+}
+
+.product-detail {
+    display: flex;
+    justify-content: space-between; /* Mantener la imagen a la izquierda y el contenido a la derecha */
+    padding: 150px 150px;
+}
+
+.product-gallery {
+    position: relative; /* Necesario para el posicionamiento absoluto de los elementos internos */
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px; /* Ajusta según tu diseño */
+}
+
+.main-image {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    height: auto;
+    display: block;
+}
+
+.product-info {
+    max-width: 600px;
+}
+
+.product-info h2 {
+    margin: 0;
+}
+
+.price {
+    font-size: 1.5em;
+    margin: 50px 0;
+}
+
+.descripcion_producto {
+    margin: 20px 0;
+    color: gray;
+}
+
+.intensidad {
+    display: flex;
+    align-items: center;
+}
+
+.intensidad-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.intensidad i {
+    color: #f0ad4e;
+}
+
+.payment-methods {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.add-to-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-to-cart label {
+    font-weight: bold;
+}
+
+.add-to-cart input {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.add-to-cart button {
+    width: 100%;
+    background-color: rgb(191, 121, 95);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'gliker';
+    font-size: 1rem;
+}
+
+.add-to-cart button:hover {
+    background-color: #1d1b1b;
+    transition: 0.5s;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 1024px) {
+    .product-detail {
+        flex-direction: column; /* Cambiar la dirección del flex para móviles */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .product-gallery {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .main-image {
+        max-width: 100%;
+        margin-top: 100px;
+    }
+
+    .product-info {
+        max-width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .price {
+        font-size: 1.2em;
+    }
+
+    .descripcion {
+        margin: 15px 0;
+    }
+
+    .intensidad {
+        font-size: 1em;
+    }
+
+    .add-to-cart input,
+    .add-to-cart button {
+        font-size: 0.9em;
+    }
+
+    .payment-methods {
+        flex-direction: column; /* Ajustar los métodos de pago en columna en pantallas pequeñas */
+    }
+
+    .payment-method {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-detail {
+        padding: 10px;
+    }
+
+    .product-gallery {
+        margin: 0;
+    }
+
+    .main-image {
+        max-width: 100%;
+    }
+
+    .add-to-cart {
+        gap: 10px;
+    }
+
+    .add-to-cart input,
+    .add-to-cart button {
+        font-size: 0.9em;
+    }
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.product-gallery {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px; /* Ajusta según tu diseño */
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.carousel-prev, .carousel-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: #8a3319; /* Color del indicador activo */
+}
+
+@media (max-width: 1024px) {
+    .carousel-prev, .carousel-next {
+        margin-top: 50px;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .carousel-indicators {
+        bottom: 5px;
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+.main-image {
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+}
+
+.fullscreen-modal {
+    display: none; /* Oculta el modal por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.fullscreen-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+
+/* Añadir estilo para el cursor de lupa */
+
+.carousel-images img {
+    cursor: zoom-in;
+}
+
+/* Añadir estilo para el overlay */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none; /* Elimina el fondo */
+    border: none; /* Elimina el borde */
+    padding: 0; /* Elimina el padding para ajustar el tamaño */
+    cursor: pointer; /* Mantiene el cursor en forma de puntero */
+    font-size: 50px; /* Tamaño de la X */
+    color: #fff; /* Color de la X */
+    z-index: 1001; /* Asegura que esté sobre otros elementos */
+    transition: color 0.3s ease; /* Efecto de transición en el color */
+}
+
+.close-btn:hover {
+    color: rgb(191, 121, 95); /* Cambia el color al pasar el cursor por encima */
+}

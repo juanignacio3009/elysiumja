@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium</title>
+    <link rel="stylesheet" href="/css/style_productos_general.css">
+    <link rel="stylesheet" href="/css/style_productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo.ico?v=1724798368339">
+    <script src="https://kit.fontawesome.com/50a147dc6f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <script>
+  // CARRITO SYNC
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartButton = document.getElementById('cartButton');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const subtotalElement = document.getElementById('subtotal');
+    const totalElement = document.getElementById('total');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemCount = document.getElementById('cartItemCount');
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Añadir producto al carrito
+    const addToCartForm = document.querySelector('.add-to-cart');
+    addToCartForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Evita el envío del formulario
+
+        const quantityInput = addToCartForm.querySelector('#quantity');
+        const quantity = parseInt(quantityInput.value, 10);
+        const productId = '12'; // Aquí deberías usar el ID real del producto
+        const productName = 'Porta con diseño'; // Cambia por el nombre real del producto
+        const productPrice = 2000.00; // Cambia por el precio real del producto
+        const productImage = 'https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0012.jpeg?v=1728158800194'; // Cambia por la imagen real del producto
+        const category = 'portasahumerios'; // Cambia por la categoría real del producto
+        const categoryType = 'elysium';
+      
+        addProductToCart(productId, productName, productPrice, productImage, quantity, category, categoryType);
+        updateCart();
+        saveCart();
+    });
+
+    function addProductToCart(id, name, price, image, quantity, category, categoryType) {
+        const existingProduct = cart.find(item => item.id === id);
+
+        if (existingProduct) {
+            existingProduct.quantity += quantity;
+        } else {
+            cart.push({ id, name, image, quantity, price, category, categoryType });
+        }
+    }
+
+    function updateCart() {
+        cartItemsContainer.innerHTML = '';
+
+        let subtotal = 0;
+        let itemCount = 0;
+
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            itemCount += item.quantity;
+
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <span class="nameq">${item.name}</span>
+                <span class="precioq">$${itemTotal.toFixed(2)}</span>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        cartCount.textContent = itemCount;
+        cartItemCount.textContent = itemCount;
+        subtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+        totalElement.textContent = `Total: $${subtotal.toFixed(2)}`;
+    }
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Cargar el carrito al inicio
+    updateCart();
+});
+  </script>
+  
+    <!-- MENÚ NAVEGACIÓN -->
+    <nav>
+        <a href="/html/index.html" class="enlace">
+            <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo.png?v=1724798368339" alt="logo" class="logo">
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul class="nav-list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../index.html#aromas">Aromas</a></li>
+            <li><a class="active" href="../productos.html">Productos</a></li>
+            <li><a href="../index.html#contacto">Contacto</a></li>
+            <li class="search-container">
+              <i id="search-icon" class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Buscar..." class="search-bar">
+            </li>
+            <li><a id="cartButton" class="cart-icon"  href="../productos.html">(<span id="cartCount">0</span>)<i class="fas fa-shopping-cart"></i></a></li>
+        </ul>
+        <div id="cartSidebar" class="cart-sidebar">
+            <div class="cart-content">
+                <span class="close">&times;</span>
+                <h2>Tu carrito <br>(<span id="cartItemCount">0</span> artículos)</h2>
+                <div id="cartItems"></div>
+                <div id="cartSummary">
+                    <p>Subtotal: <span id="subtotal">$0</span></p>
+                    <p>Total: <span id="total">$0</span></p>
+                </div>
+                <button id="proceedButton">Iniciar compra</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="product-detail">
+        <div class="product-gallery">
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0012.jpeg?v=1728158800194" alt="Imagen del producto" class="main-image" onclick="openFullscreen(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay para la imagen en pantalla completa -->
+        <div id="fullscreenOverlay" class="overlay">
+            <button class="close-btn" onclick="closeFullscreen()">&times;</button>
+            <img id="fullscreenImage" src="" alt="Fullscreen Image">
+        </div>
+
+        <div class="product-info">
+            <h2>Porta con diseño</h2>
+            <p class="price">$2000.00</p>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <p>Pagá con efectivo</p>
+                </div>
+                <div class="payment-method">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <p>Pagá con transferencia</p>
+                </div>
+            </div>
+            <p class="descripcion_producto">
+                Elegí tu porta sahumerios hecho a mano y pintado con diseños únicos. ¡Llevate el que más te guste y decorá tu espacio con estilo!
+            </p>
+            <p class="intensidad">
+                CATEGORÍA
+                <span class="intensidad-icons">
+                    <span class="elysium">ELYSIUM</span>
+                    <span class="quom_tipo">RÚSTICO</span>
+                </span>
+            </p>
+            <form class="add-to-cart">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="100" value="1">
+                <button type="submit">Añadir al carrito</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container-footer">
+            <div class="footer-top">
+                <div class="logo-section">
+                    <a href="#" class="logo-link">
+                        <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo-footer.png?v=1724798368339" alt="logo_footer" class="logo-footer">
+                    </a>
+                    <p class="description">Encuentra la paz en cada aroma.</p>
+                </div>
+                <div class="links-section">
+                    <h3 class="section-title">Enlaces</h3>
+                    <ul class="links-list">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="../productos.html">Productos</a></li>
+                        <li><a href="../index.html#contacto">Contacto</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="contact-section">
+                    <h3 class="section-title">Contacto</h3>
+                    <p><i class="fa-solid fa-envelope"></i> elysium2024.ja@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i> +54 351 861-9382</p>
+                    <a href="https://maps.app.goo.gl/nwkWK8r8idpYMqgz5"><p><i class="fa-solid fa-location-dot"></i> Colegio de la Inmaculada</p></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-media">
+                    <a href="https://www.instagram.com/elysium.ja/" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=3518619382" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/people/Elysium-Ja/pfbid0akYoQEc3qxVXsPsshHGqkQr8ARCJiYkb46vKJdYY9cyFp6FUBRDoQeumKoShn9tEl/?mibextid=LQQJ4d" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://x.com/elysium_ja/" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.tiktok.com/@elysium.ja" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="mailto:elysium2024.ja@gmail.com" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+                </div>
+                <p class="copyright">&copy; 2024 Elysium.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script_productos_general.js"></script>
+</body>
+</html>

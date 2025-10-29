@@ -1,0 +1,222 @@
+body {
+    font-family: 'Gliker', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Color de fondo más claro para contraste */
+}
+
+header {
+    padding: 20px;
+    background-color: #333; /* Color de fondo del menú */
+    color: white; /* Color del texto del menú */
+    text-align: center; /* Centra el texto del menú */
+}
+
+header nav {
+    display: flex;
+    justify-content: center; /* Centra los enlaces del menú */
+    gap: 20px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px; /* Menos padding para enlaces */
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px; /* Ampliado el ancho máximo del formulario */
+    min-width: 300px;
+    margin: 20px auto 50px auto; /* Centra el contenido y añade espacio superior e inferior */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Centra los elementos en el contenedor */
+}
+
+.form-container {
+    flex: 2; /* Aumenta el espacio ocupado por el formulario */
+    min-width: 300px; /* Reducción del tamaño mínimo del formulario */
+    max-width: 100%; /* Permite el uso del ancho completo disponible */
+    box-sizing: border-box;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    padding: 15px; /* Reducción del padding */
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Añade sombra sutil para profundidad */
+}
+
+.invoice-container {
+    flex: 1; /* Ajusta el espacio ocupado por la factura */
+    border: 1px solid #ddd;
+    padding: 15px; /* Reducción del padding */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Añade sombra sutil para profundidad */
+    overflow-y: auto;
+    max-height: 600px;
+    font-size: 12px;
+}
+
+.invoice-logo {
+    max-width: 120px; /* Tamaño del logo ajustado */
+    height: auto;
+    margin: 0 auto 20px; /* Espacio ajustado debajo del logo */
+    display: block;
+}
+
+form label {
+    display: block;
+    margin: 8px 0 4px; /* Espaciado ajustado */
+    font-weight: 600; /* Font-weight más fuerte */
+    color: #333; /* Color de texto más oscuro para mejor contraste */
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px; /* Padding ajustado para reducir altura */
+    margin-bottom: 10px; /* Espaciado adicional entre los campos */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px; /* Tamaño de fuente ajustado */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus, form select:focus {
+    border-color: #bf795f; /* Color de borde cuando está enfocado */
+    box-shadow: 0 0 5px rgba(191, 121, 95, 0.5); /* Efecto de sombra al enfocar */
+    outline: none; /* Elimina el contorno predeterminado */
+}
+
+button {
+    padding: 10px; /* Padding reducido para botón */
+    font-size: 16px; /* Tamaño de fuente ajustado */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #bf795f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #8c4b3a;
+    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+}
+
+.invoice-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px; /* Espacio entre los elementos de la factura */
+    border-bottom: 1px solid #ddd; /* Línea inferior más sutil */
+    padding-bottom: 8px; /* Mayor espacio inferior */
+}
+
+.invoice-item img {
+    width: 30px; /* Tamaño ajustado de la imagen del producto */
+    height: auto;
+    object-fit: cover;
+    margin-right: 10px; /* Espacio ajustado entre la imagen y el texto */
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info p {
+    margin: 2px 0;
+    font-size: 12px; /* Tamaño de texto ajustado */
+}
+
+#info_vendedor, #info_comprador{
+    font-size: 12px;
+    color: #333; /* Color de texto más oscuro para mejor contraste */
+}
+
+#invoice-summary {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 14px; /* Tamaño de texto ajustado */
+    color: #333; /* Color de texto más oscuro para mejor contraste */
+}
+
+.hidden{
+    display: none;
+}
+
+#appointment-time{
+    font-family: 'gliker';
+}
+
+#invoice-clone img{
+    max-width: 250px;
+    margin-bottom: 50px;
+}
+
+#invoice-clone, #info_comprador{
+    margin-bottom: 20px;
+}
+
+
+#loading-overlay p{
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-container {
+        max-width: 100%; /* Asegura que el formulario use el ancho completo en pantallas pequeñas */
+    }
+
+    .invoice-logo {
+        max-width: 100px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    form input {
+        font-size: 14px; /* Tamaño de fuente ajustado para pantallas más pequeñas */
+    }
+
+    .invoice-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .invoice-item img {
+        width: 25px; /* Tamaño reducido de la imagen en pantallas pequeñas */
+    }
+}
+
+.recordatorio-holder{
+  color: red;
+  font-size: 12px;
+  padding-bottom: 10px;
+}
