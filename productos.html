@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium</title>
+    <link rel="stylesheet" href="/css/style_productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo.ico?v=1724798368339">
+    <script src="https://kit.fontawesome.com/50a147dc6f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="notification" style="display:none;"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            // Inicialmente ocultar el botón
+            backToTopButton.style.display = 'none';
+    
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) { // Ajusta el valor según sea necesario
+                    backToTopButton.style.display = 'inline-flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+
+    <!-- MENÚ NAVEGACIÓN -->
+<nav>
+    <a href="index.html" class="enlace">
+        <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo.png?v=1724798368339" alt="logo" class="logo">
+    </a>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <ul class="nav-list">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#aromas">Aromas</a></li>
+        <li><a class="active" href="#">Productos</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li class="search-container">
+            <i id="search-icon" class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Buscar..." class="search-bar" id="search-bar">
+        </li>
+        <li><a id="cartButton" class="cart-icon">(<span id="cartCount">0</span>)<i class="fas fa-shopping-cart"></i></a></li>
+        <div id="cartSidebar" class="cart-sidebar">
+            <div class="cart-content">
+              <span class="close">&times;</span>
+              <br>
+              <center><h2>Tu carrito <br>(<span id="cartItemCount">0</span> artículos)</h2></center>
+              <br><br>
+              <div id="cartItems"></div>
+              <div id="cartSummary">
+                <p><span id="subtotal">$0</span></p><p id="discount-applied"></p>
+                <p><span id="total">$0</span></p>
+              </div>
+              <div class="proceed-button-container">
+                <a href="factura.html"><button id="proceedButton" disabled>Iniciar compra</button></a>
+            </div>            
+            </div>
+          </div>
+    </ul>
+</nav>
+
+<!-- BOTÓN SCROLL-TOP -->
+<a href="#" class="back-to-top">
+    <i class="fa-solid fa-arrow-up-wide-short"></i>
+</a>
+  
+<!-- MODAL DE PROMOCIONES -->
+<div id="promoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/Promos.png?v=1729624276462" alt="Promociones" style="width: 100%; height: auto;">
+    </div>
+</div>
+
+
+<!-- NUESTROS PRODUCTOS -->
+
+    <section class="section">
+        <div class="container">
+            <div class="content">
+                <h2 class="title">Nuestros Productos</h2>
+                <p class="descripcion">
+                    Explora nuestro catálogo de productos artesanales.
+                </p>
+                <div class="filter-container">
+                    <button class="filter-button" onclick="toggleFilters()">
+                        Mostrar Productos
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div id="filters" class="filters" style="display: none;">
+                        <button onclick="filterPortasahumerios('portasahumerios')">Portasahumerios</button>
+                        <button onclick="sortProducts('priceAsc')">Menor a mayor precio</button>
+                        <button onclick="sortProducts('priceDesc')">Mayor a menor precio</button>
+                        <button onclick="filterDiscount()">Productos con descuento</button>
+                        <div class="intensity-filter">
+                            <p>Intensidad</p>
+                            <button><i class="fa-solid fa-spray-can-sparkles" data-intensity="1" onclick="toggleFilterByIntensity(1)"></i></button>
+                            <button><i class="fa-solid fa-spray-can-sparkles" data-intensity="2" onclick="toggleFilterByIntensity(2)"><i class="fa-solid fa-spray-can-sparkles"></i></i></button>
+                            <button><i class="fa-solid fa-spray-can-sparkles" data-intensity="3" onclick="toggleFilterByIntensity(3)"><i class="fa-solid fa-spray-can-sparkles"><i class="fa-solid fa-spray-can-sparkles"></i></i></i></button>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+                <div class="product-grid">
+
+                    <!-- PRODUCTO 1 -->
+                    <div class="product-card" data-name="Pack citronela" data-id="1" data-price="2500" data-discount="false" data-intensity="3" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0001.jpeg?v=1727837163052">
+                        <a class="product-link" href="productos/producto1.html">
+                            <span class="sr-only">View</span>
+                          <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0001.jpeg?v=1727837163052">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack citronela</h3>
+                            <p class="product-description">Disfrutá de 10 sahumerios de citronela, ideales para mantener alejados a los mosquitos. ¡Protegéte con su fragancia natural!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+             </div>
+
+                    <!-- PRODUCTO 2 -->
+                    <div class="product-card" data-name="Pack vainilla" data-id="2" data-price="2500" data-discount="false" data-intensity="2" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0002.jpeg?v=1727837424112">
+                        <a class="product-link" href="productos/producto2.html">
+                            <span class="sr-only">View</span>
+                          <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0002.jpeg?v=1727837424112">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack vainilla</h3>
+                            <p class="product-description">Disfrutá de 10 sahumerios de vainilla, aroma suave y dulce, ideales para infundir tu espacio con paz y tranquilidad. ¡Déjate llevar por su aroma!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500 <span></span></p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+             </div>
+
+                    <!-- PRODUCTO 3 -->
+                    <div class="product-card" data-name="Pack manzanilla" data-id="3" data-price="2500" data-discount="false" data-intensity="2" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0003.jpeg?v=1727836984942">
+                        <a class="product-link" href="productos/producto3.html">
+                            <span class="sr-only">View</span>
+                          <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0003.jpeg?v=1727836984942">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack manzanilla</h3>
+                            <p class="product-description">Relajá tu entorno con 10 sahumerios de manzanilla, diseñados para transmitir calma y equilibrio. ¡Sentí su aroma suave y reparador!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+            </div>
+
+                    <!-- PRODUCTO 4 -->
+                    <div class="product-card" data-name="Pack rosa" data-id="4" data-price="2500" data-discount="false" data-intensity="1" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0004.jpeg?v=1727835368138">
+                        <a class="product-link" href="productos/producto4.html">
+                            <span class="sr-only">View</span>
+                        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0004.jpeg?v=1727835368138">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack rosa</h3>
+                            <p class="product-description">Disfrutá de 10 sahumerios de rosa, ideales para purificar y proteger tu espacio. ¡Siente la energía renovadora de este poderoso aroma!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+            </div>
+
+                    <!-- PRODUCTO 5 -->
+                    <div class="product-card" data-name="Pack ruda" data-id="5" data-price="2500" data-discount="false" data-intensity="2" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0005.jpeg?v=1727837874896">
+                        <a class="product-link" href="productos/producto5.html">
+                            <span class="sr-only">View</span>
+                        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0005.jpeg?v=1727837874896">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack ruda</h3>
+                            <p class="product-description">Sentí el aroma de 10 sahumerios de ruda, perfectos para limpiar energías y atraer buenas vibras. ¡Dale a tu espacio un toque de renovación!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+             </div>
+
+                    <!-- PRODUCTO 6 -->
+                    <div class="product-card" data-name="Pack lavanda" data-id="6" data-price="2500" data-discount="false" data-intensity="2" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0006.jpeg?v=1727838118413">
+                        <a class="product-link" href="productos/producto6.html">
+                            <span class="sr-only">View</span>
+                        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0006.jpeg?v=1727838118413">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack lavanda</h3>
+                            <p class="product-description">Crea un ambiente de calma con el sahumerio de lavanda. Su fragancia floral reduce el estrés y promueve un sueño reparador. ¡Déjate llevar por su serenidad!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                    </div>
+            </div>
+
+                    <!-- PRODUCTO 7 -->
+                    <div class="product-card" data-name="Pack romero" data-id="7" data-price="2500" data-discount="false" data-intensity="3" data-category="sahumerios" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0007.jpeg?v=1728011141472">
+                        <a class="product-link" href="productos/producto7.html">
+                            <span class="sr-only">View</span>
+                        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0007.jpeg?v=1728011141472">
+                        <div class="product-info">
+                            <h3 class="product-title">Pack romero</h3>
+                            <p class="product-description">Revitaliza tu espacio con el sahumerio de Romero. Su aroma fresco purifica y fomenta la claridad mental. ¡Deja que su energía te envuelva!</p>
+                        </div>
+                        </a>
+                        <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>INTENSIDAD</p>
+                            <div class="intensidad-icons">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <p class="price">$2.500</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                     </div>
+                </div>
+
+                    <!-- PRODUCTO 8 -->
+                    <div class="product-card" data-name="Porta triple buho" data-id="8" data-price="4000" data-discount="false" data-category="portasahumerios" data-categorytype="grande" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0008.jpeg?v=1727838815032">
+                        <a class="product-link" href="productos/producto8.html">
+                            <span class="sr-only">View</span>
+                        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0008.jpeg?v=1727838815032">
+                        <div class="product-info">
+                            <h3 class="product-title">Porta triple buho</h3>
+                            <p class="product-description">Portasahumerio triple buho, hecho a mano por la comunidad Qom. Al elegirlo, apoyás su trabajo artesanal y te llevás una pieza única.</p>
+                        </div>
+                          </a>
+                          <div class="content-card-product">
+                            <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="quom">QUOM</span>
+                                <span class="quom_tipo">GRANDE</span>
+                            </div>
+                          </div>
+                        <div class="price-container">
+                            <p class="price">$4.000</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                        </div>
+                   </div>
+            </div>
+
+                <!-- PRODUCTO 9 -->
+                <div class="product-card" data-name="Porta buho" data-id="9" data-price="4000" data-discount="false" data-category="portasahumerios" data-categorytype="grande" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0009.jpeg?v=1727839676249">
+                    <a class="product-link" href="productos/producto9.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0009.jpeg?v=1727839676249">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta buho</h3>
+                        <p class="product-description">Portasahumerio buho, creado a mano por la comunidad Qom. Este diseño único apoya el trabajo artesanal y decora cualquier rincón de tu hogar.</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="quom">QUOM</span>
+                                <span class="quom_tipo">GRANDE</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$4.000</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+        </div>
+
+                <!-- PRODUCTO 10 -->
+                <div class="product-card" data-name="Porta buho grande" data-id="10" data-price="4000" data-discount="false" data-category="portasahumerios" data-categorytype="grande" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0010.jpeg?v=1727839983666">
+                    <a class="product-link" href="productos/producto10.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0010.jpeg?v=1727839983666">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta buho grande</h3>
+                        <p class="product-description">Portasahumerio buho grande, hecho a mano por la comunidad Qom. Al elegirlo, apoyás su trabajo artesanal y te llevás una pieza única.</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="quom">QUOM</span>
+                                <span class="quom_tipo">GRANDE</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$4.000</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+        </div>
+
+                <!-- PRODUCTO 11 -->
+                <div class="product-card" data-name="Porta buho azul" data-id="11" data-price="2500" data-discount="false" data-category="portasahumerios" data-categorytype="chico" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0011.jpeg?v=1727840566729">
+                    <a class="product-link" href="productos/producto11.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0011.jpeg?v=1727840566729">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta buho azul</h3>
+                        <p class="product-description">Portasahumerios buho azul, hecho a mano por la comunidad Qom. Al elegirlo, apoyás su trabajo artesanal y te llevás una pieza única.</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="quom">QUOM</span>
+                                <span class="quom_tipo">CHICO</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$2.500</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+        </div>   
+                  
+                <!-- PRODUCTO 12 -->
+                <div class="product-card" data-name="Porta con diseño" data-id="12" data-price="2000" data-discount="false" data-category="portasahumerios" data-categorytype="elysium" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0012.jpeg?v=1728158800194">
+                    <a class="product-link" href="productos/producto12.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0012.jpeg?v=1728158800194">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta con diseño</h3>
+                        <p class="product-description">Elegí tu porta sahumerios hecho a mano y pintado con diseños únicos. ¡Llevate el que más te guste y decorá tu espacio con estilo!</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="elysium">ELYSIUM</span>
+                                <span class="quom_tipo">RÚSTICO</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$2.000</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+        </div>
+                  
+                <!-- PRODUCTO 13 -->
+                <div class="product-card" data-name="Porta con diseño" data-id="13" data-price="2000" data-discount="false" data-category="portasahumerios" data-categorytype="elysium" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0013.jpeg?v=1728159437802">
+                    <a class="product-link" href="productos/producto13.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0013.jpeg?v=1728159437802">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta con diseño</h3>
+                        <p class="product-description">Elegí tu porta sahumerios hecho a mano y pintado con diseños únicos. ¡Llevate el que más te guste y decorá tu espacio con estilo!</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="elysium">ELYSIUM</span>
+                                <span class="quom_tipo">CIRCULAR</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$2.000</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+        </div>
+
+                <!-- PRODUCTO 14 -->
+                <div class="product-card" data-name="Porta con diseño" data-id="14" data-price="2000" data-discount="false" data-category="portasahumerios" data-categorytype="elysium" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0014.jpeg?v=1728159775024">
+                      <a class="product-link" href="productos/producto14.html">
+                        <span class="sr-only">View</span>
+                    <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0014.jpeg?v=1728159775024">
+                    <div class="product-info">
+                        <h3 class="product-title">Porta con diseño</h3>
+                        <p class="product-description">Elegí tu porta sahumerios hecho a mano y pintado con diseños únicos. ¡Llevate el que más te guste y decorá tu espacio con estilo!</p>
+                    </div>
+                    </a>
+                    <div class="content-card-product">
+                      <div class="intensidad">
+                                <p>CATEGORÍA</p>
+                            <div class="intensidad-icons">
+                                <span class="elysium">ELYSIUM</span>
+                                <span class="quom_tipo">TABLA</span>
+                            </div>
+                          </div>
+                    <div class="price-container">
+                        <p class="price">$2.000</p>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="text" class="quantity" value="1" min="1" maxlength="3">
+                        <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+          </div>
+
+<!-- PRODUCTO 15 -->
+<div class="product-card" data-name="Porta cerámica" data-id="15" data-price="3000" data-discount="false" data-category="portasahumerios" data-categorytype="cerámica" data-image="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0015.jpeg?v=1729464653890">
+    <a class="product-link" href="productos/producto15.html">
+        <span class="sr-only">View</span>
+        <img class="product-image" src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/producto_0015.jpeg?v=1729464653890">
+        <div class="product-info">
+            <h3 class="product-title">Porta cerámica</h3>
+            <p class="product-description">Portasahumerios de cerámica artesanales. Instagram: @cosaslindas_tr</p>
+        </div>
+    </a>
+    <div class="content-card-product">
+        <div class="intensidad">
+            <p>CATEGORÍA</p>
+            <div class="intensidad-icons">
+                <span class="ceramica">CERÁMICA</span>
+            </div>
+        </div>
+        <div class="price-container">
+            <p class="price">$3.000</p>
+        </div>
+        <div class="add-to-cart">
+            <input type="text" class="quantity" value="1" min="1" maxlength="3">
+            <button class="add-cart-button"><i class="fa-solid fa-basket-shopping"></i></button>
+        </div>
+    </div>
+</div>
+
+          
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="container-footer">
+      <div class="footer-top">
+        <div class="logo-section">
+          <a href="#" class="logo-link">
+            <img src="https://cdn.glitch.global/357c4ceb-367e-4cd0-a5e4-cb3de9b949c1/logo-footer.png?v=1724798368339" alt="logo_footer" class="logo-footer">
+          </a>
+          <p class="description">Encuentra la paz en cada aroma.</p>
+        </div>
+        <div class="links-section">
+          <h3 class="section-title">Enlaces</h3>
+          <ul class="links-list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="../productos.html">Productos</a></li>
+            <li><a href="../index.html#contacto">Contacto</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+          </ul>
+        </div>
+        <div class="contact-section">
+          <h3 class="section-title">Contacto</h3>
+          <p><i class="fa-solid fa-envelope"></i> elysium2024.ja@gmail.com</p>
+          <p><i class="fa-solid fa-phone"></i> +54 351 861-9382</p>
+          <a href="https://maps.app.goo.gl/nwkWK8r8idpYMqgz5"><p><i class="fa-solid fa-location-dot"></i> Colegio de la Inmaculada</p></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="social-media">
+          <a href="https://www.instagram.com/elysium.ja/" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send?phone=3518619382" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/people/Elysium-Ja/pfbid0akYoQEc3qxVXsPsshHGqkQr8ARCJiYkb46vKJdYY9cyFp6FUBRDoQeumKoShn9tEl/?mibextid=LQQJ4d" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://x.com/elysium_ja/" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.tiktok.com/@elysium.ja" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="mailto:elysium2024.ja@gmail.com" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+        <p class="copyright">&copy; 2024 Elysium.</p>
+      </div>
+    </div>
+  </footer>
+
+
+<script src="/js/script_productos.js"></script>
+<script src="/js/script_factura.js"></script>
+
+</body>
+</html>
